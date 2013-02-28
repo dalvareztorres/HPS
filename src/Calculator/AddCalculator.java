@@ -2,6 +2,8 @@ package Calculator;
 
 import Type.Type;
 import Operator.Operator;
+import Type.DoubleType;
+import Type.IntegerType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
@@ -9,7 +11,7 @@ import java.util.logging.Logger;
 
 public class AddCalculator implements Calculator {
 
-    public Type calculate(Operator operator, Type p0, Type p1) {
+    public Type calculate(Operator operator, Type p0, Type p1) throws Exception {
         for (Method method : AddCalculator.class.getDeclaredMethods()) {
             if (getMethodSignature(method).equals(getSignature(operator, p0, p1))) {
                 try {
@@ -19,23 +21,23 @@ public class AddCalculator implements Calculator {
                 }
             }
         }
-        return null;
+        throw new Exception ("No suitable methods");
     }
     
-    public Integer add(Integer arg0, Integer arg1) {
-        return arg0 + arg1;
+    public Integer add(IntegerType arg0, IntegerType arg1) {
+        return arg0.getValue() + arg1.getValue();
     }
 
-    public Double add(Integer arg0, Double arg1) {
-        return arg0 + arg1;
+    public Double add(IntegerType arg0, DoubleType arg1) {
+        return arg0.getValue() + arg1.getValue();
     }
 
-    public Double add(Double arg0, Integer arg1) {
-        return arg0 + arg1;
+    public Double add(DoubleType arg0, IntegerType arg1) {
+        return arg0.getValue() + arg1.getValue();
     }
 
-    public Double add(Double arg0, Double arg1) {
-        return arg0 + arg1;
+    public Double add(DoubleType arg0, DoubleType arg1) {
+        return arg0.getValue() + arg1.getValue();
     }
 
     private String getMethodSignature(Method method) {

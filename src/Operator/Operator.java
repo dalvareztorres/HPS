@@ -16,7 +16,7 @@ public class Operator{
         Operator.operatorMap.put("/", new Operator("/", OperatorType.BINARY));        
     }
     
-    private Operator (String symbol, OperatorType operatorType){
+    public Operator (String symbol, OperatorType operatorType){
         this.symbol = symbol;
         this.operatorType = operatorType;
     }
