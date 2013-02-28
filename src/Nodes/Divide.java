@@ -1,10 +1,10 @@
-package reflection;
+package Nodes;
 
 import java.lang.reflect.Method;
 
-public class Multiply extends BinaryOperator {
+public class Divide extends BinaryOperator {
 
-	public Multiply(Token left, Token right) {
+	public Divide(Token left, Token right) {
 		super(left, right);
 	}
 	
@@ -23,24 +23,24 @@ public class Multiply extends BinaryOperator {
 	}
 	
 	
-	public Integer multiply(Integer arg0, Integer arg1) {
-		return arg0 * arg1;
+	public Integer divide(Integer arg0, Integer arg1) {
+		return arg0 / arg1;
 	}
 	
-	public Double multiply(Integer arg0, Double arg1) {
-		return arg0 * arg1;
+	public Double divide(Integer arg0, Double arg1) {
+		return arg0 / arg1;
 	}
 
-	public Double multiply(Double arg0, Integer arg1) {
-		return arg0 * arg1;
+	public Double divide(Double arg0, Integer arg1) {
+		return arg0 / arg1;
 	}
 
-	public Double multiply(Double arg0, Double arg1) {
-		return arg0 * arg1;
+	public Double divide(Double arg0, Double arg1) {
+		return arg0 / arg1;
 	}
 
 	private Method getMethod(Object left, Object right) throws NoSuchMethodException {
-		return getClass().getMethod("multiply", left.getClass(), right.getClass());
+		return getClass().getMethod("divide", left.getClass(), right.getClass());
 	}
 
 	private boolean check(Object left, Object right) {

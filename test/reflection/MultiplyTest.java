@@ -1,5 +1,7 @@
 package reflection;
 
+import Nodes.Multiply;
+import Nodes.Constant;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
