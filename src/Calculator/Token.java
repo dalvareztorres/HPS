@@ -1,4 +1,4 @@
-package Nodes;
+package Calculator;
 
 public interface Token {
 	

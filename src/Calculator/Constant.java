@@ -1,4 +1,4 @@
-package Nodes;
+package Calculator;
 
 public class Constant<T> implements Token {
 	
