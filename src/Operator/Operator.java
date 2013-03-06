@@ -4,29 +4,25 @@ import java.util.HashMap;
 
 public class Operator{
     
+    public static final Operator ADD = new Operator("Add", "+", OperatorType.BINARY);
+    public static final Operator MULTIPLY = new Operator("Multiply", "*", OperatorType.BINARY);
+    
+    private String name;
     private String symbol;
     private OperatorType operatorType;
-    private static HashMap <String, Operator> operatorMap;
-    
-    static{
-        Operator.operatorMap = new HashMap<>();
-        Operator.operatorMap.put("+", new Operator("+", OperatorType.BINARY));
-        Operator.operatorMap.put("-", new Operator("-", OperatorType.BINARY));
-        Operator.operatorMap.put("*", new Operator("*", OperatorType.BINARY));
-        Operator.operatorMap.put("/", new Operator("/", OperatorType.BINARY));        
-    }
-    
-    public Operator (String symbol, OperatorType operatorType){
+
+    private Operator (String name, String symbol, OperatorType operatorType){
+        this.name = name;
         this.symbol = symbol;
         this.operatorType = operatorType;
     }
     
-    public static Operator get (String symbol){
-        return operatorMap.get(symbol);
+    public String getName(){
+        return this.name;
     }
 
     public String getSymbol() {
-        return symbol;
+        return this.symbol;
     }
 
 }

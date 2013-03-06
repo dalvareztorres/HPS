@@ -1,22 +1,29 @@
 
 package Main;
 
-import Calculator.AddCalculator;
-import Calculator.Calculator;
+import Node.ConstantNode;
+import Node.OperationNode;
 import Operator.Operator;
-import Operator.OperatorType;
-import Type.DoubleType;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Type.IntegerType;
+
 
 public class Main {
 
     public static void main(String[] args) {
-        AddCalculator c = new AddCalculator();
-        try {
-            System.out.println(c.calculate(new Operator("+", OperatorType.BINARY), new DoubleType(2), new DoubleType(2)));
-        } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        OperationNode root = new OperationNode(Operator.ADD);
+        root.insert(new ConstantNode(new IntegerType(2)));
+        root.insert(new OperationNode(Operator.ADD));
+        root.insert(new ConstantNode(new IntegerType(2)));
+        root.insert(new OperationNode(Operator.ADD));
+        root.insert(new ConstantNode(new IntegerType(2)));
+        root.insert(new OperationNode(Operator.ADD));
+        root.insert(new ConstantNode(new IntegerType(2)));
+        root.insert(new OperationNode(Operator.ADD));
+        root.insert(new ConstantNode(new IntegerType(2)));
+        root.insert(new OperationNode(Operator.ADD));
+        root.insert(new ConstantNode(new IntegerType(2)));
+        root.insert(new ConstantNode(new IntegerType(2)));
+        System.out.println(root.evaluate().toString());
+        
     }
 }
