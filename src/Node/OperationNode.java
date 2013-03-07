@@ -81,26 +81,40 @@ public class OperationNode extends Node {
 
     @Override
     public String toString() {
+        
+        String expression = "";
 
-        if (isChildWithLowerPrecedence()) {
-            return this.leftChild.toString() + this.operator.getSymbol()
-                    + "("+this.rightChild.toString()+")";
+        if (isLeftChildWithLowerPrecedence()) {
+            expression = "(" + this.leftChild.toString() + ")" + this.operator.getSymbol()
+                    + this.rightChild.toString();
         }
+
+        if (isRightChildWithLowerPrecedence()) {
+            return this.leftChild.toString() + this.operator.getSymbol()
+                    + "(" + this.rightChild.toString() + ")";
+        }
+
+
         return this.leftChild.toString() + this.operator.getSymbol()
-                +     this.rightChild.toString();
+                + this.rightChild.toString();
     }
 
-    private boolean isChildWithLowerPrecedence() {
+    private boolean isLeftChildWithLowerPrecedence() {
         if (this.leftChild instanceof OperationNode) {
             return ((OperationNode) this.leftChild).getOperator().getPrecedence()
                     < this.operator.getPrecedence();
         }
+
+        return false;
+
+
+    }
+
+    private boolean isRightChildWithLowerPrecedence() {
         if (this.rightChild instanceof OperationNode) {
             return ((OperationNode) this.rightChild).getOperator().getPrecedence()
                     < this.operator.getPrecedence();
         }
         return false;
-
-
     }
 }
