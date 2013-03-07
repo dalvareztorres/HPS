@@ -8,12 +8,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OperationNode extends Node {
-    
+
     private Operator operator;
     private Node leftChild;
     private Node rightChild;
-    
-    public OperationNode (Operator operator){
+
+    public OperationNode(Operator operator) {
         this.operator = operator;
         this.leftChild = null;
         this.rightChild = null;
@@ -42,6 +42,10 @@ public class OperationNode extends Node {
         return this.rightChild;
     }
 
+    public Operator getOperator() {
+        return this.operator;
+    }
+
     private boolean isChildNull(Node child) {
         if (child == null) {
             return true;
@@ -56,22 +60,47 @@ public class OperationNode extends Node {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(OperationNode.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         throw new RuntimeException("Unable to use calculator");
     }
-    
-    public Type useCalculator () throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException{
-        Class calculatorClass = Class.forName("Calculator."+this.operator.getName()+"Calculator");
+
+    public Type useCalculator() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+        Class calculatorClass = Class.forName("Calculator." + this.operator.getName() + "Calculator");
         Object calculatorInstance = calculatorClass.newInstance();
         Method method = calculatorClass.getDeclaredMethod("calculate", getParameterClasses());
         return (Type) method.invoke(calculatorInstance, getParameters());
     }
 
     private Class[] getParameterClasses() {
-        return new Class[] {this.leftChild.evaluate().getClass(), this.rightChild.evaluate().getClass(), };
+        return new Class[]{this.leftChild.evaluate().getClass(), this.rightChild.evaluate().getClass(),};
     }
 
     private Object[] getParameters() {
-        return new Object[] {this.leftChild.evaluate(), this.rightChild.evaluate()};
+        return new Object[]{this.leftChild.evaluate(), this.rightChild.evaluate()};
+    }
+
+    @Override
+    public String toString() {
+
+        if (isChildWithLowerPrecedence()) {
+            return this.leftChild.toString() + this.operator.getSymbol()
+                    + "("+this.rightChild.toString()+")";
+        }
+        return this.leftChild.toString() + this.operator.getSymbol()
+                +     this.rightChild.toString();
+    }
+
+    private boolean isChildWithLowerPrecedence() {
+        if (this.leftChild instanceof OperationNode) {
+            return ((OperationNode) this.leftChild).getOperator().getPrecedence()
+                    < this.operator.getPrecedence();
+        }
+        if (this.rightChild instanceof OperationNode) {
+            return ((OperationNode) this.rightChild).getOperator().getPrecedence()
+                    < this.operator.getPrecedence();
+        }
+        return false;
+
+
     }
 }

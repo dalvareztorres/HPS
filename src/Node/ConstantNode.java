@@ -15,5 +15,10 @@ public class ConstantNode extends Node {
     public Type evaluate() {
         return this.value;
     }
+    
+    @Override    
+    public String toString(){
+        return String.valueOf(this.evaluate().toString());
+    }
 
 }
