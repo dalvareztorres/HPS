@@ -1,5 +1,7 @@
 package Operator;
 
+import java.util.ArrayList;
+
 public class Operator{
     
     public static final Operator ADD = new Operator("Add", "+", OperatorType.BINARY, 0);
@@ -27,6 +29,13 @@ public class Operator{
     
     public int getPrecedence(){
         return this.precedence;
+    }
+    
+    public static ArrayList<String> getOperatorSymbols(){
+        ArrayList<String> operatorSymbols = new ArrayList<>();
+        operatorSymbols.add(Operator.ADD.getSymbol());
+        operatorSymbols.add(Operator.MULTIPLY.getSymbol());
+        return operatorSymbols;
     }
 
 }
