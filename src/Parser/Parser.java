@@ -18,33 +18,6 @@ public class Parser {
         this.operatorStack = new Stack();
     }
 
-    public void parse(String string) {
-        for (int i = 0; i < string.length(); i++) {
-            String token = String.valueOf(string.charAt(i));
-
-            if (Parser.isNumeric(token)) {
-                // this.outputQueue.add(token); 
-                System.out.println(token + " es un numero");
-            }
-            if (Parser.isOperator(token)) {
-                System.out.println(token + " es un operador");
-            }
-            if (Parser.isLeftParenthesis(token)) {
-                System.out.println(token + " es un parentesis izdo");
-            }
-            if (Parser.isRightParenthesis(token)) {
-                System.out.println(token + " es un parentesis dcho");
-            }
-
-
-        }
-
-
-
-
-
-    }
-
     public static boolean isNumeric(String str) {
         NumberFormat formatter = NumberFormat.getInstance();
         ParsePosition pos = new ParsePosition(0);
